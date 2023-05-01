@@ -19,11 +19,17 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       TZ: "Asia/Tokyo"
       # 設定ファイルの永続化
-      # SQLデータをアプリケーション内に保管 ※.gitignore設定必要
+      ## SQLデータをアプリケーション内に保管 ※.gitignore設定必要
+      # 名前付きボリュームに保存し、永続化
       # SQLログをアプリケーション内に保管 ※.gitignore設定必要
       # schemaファイルの設定
     volumes:
       - ./my.cnf:/etc/mysql/conf.d/my.cnf
-      - ./mysql/data/mysql:/var/lib/mysql
-      - ./mysql/log/mysql.log:/var/log/mysql/mysql.log
+      # - ./mysql/data/mysql:/var/lib/mysql
+      - db-store:/var/lib/mysql
+      - ./mysql/log:/var/log/mysql
       - ./mysql/schema/:/var/schema/
+
+# 名前付きボリュームの作成
+volumes:
+  db-store:
