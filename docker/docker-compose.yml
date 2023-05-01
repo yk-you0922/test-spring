@@ -25,7 +25,6 @@ services:
       # schemaファイルの設定
     volumes:
       - ./my.cnf:/etc/mysql/conf.d/my.cnf
-      # - ./mysql/data/mysql:/var/lib/mysql
       - db-store:/var/lib/mysql
       - ./mysql/log:/var/log/mysql
       - ./mysql/schema/:/var/schema/
